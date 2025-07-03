@@ -1,0 +1,155 @@
+Metadata-Version: 2.4
+Name: gener8
+Version: 0.1.4
+Summary: A synthetic data generation engine
+Home-page: https://github.com/abdulrahman0044/gener8
+Author: Abdulrahman Abdulrahman
+Author-email: abdulrahamanbabatunde12@gmail.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: pandas>=1.5.0
+Requires-Dist: numpy<2.0,>=1.23.0
+Requires-Dist: scikit-learn>=1.1.0
+Requires-Dist: torch>=1.13.0
+Requires-Dist: matplotlib>=3.5.0
+Requires-Dist: seaborn>=0.11.0
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# Gener8
+
+**Gener8** is a Python-based synthetic data generation engine using neural networks. It loads data, trains a GAN-based model, and generates synthetic data that mimics the input's structure, including missing values.
+
+---
+
+## Features
+
+- **Data Connector**: Load data from CSV, JSON, Excel, or pandas DataFrames.
+- **Trainer**: Train a Gaussian Mixture Model to capture data distributions.
+- **Generator**: Produce synthetic data with numerical and categorical columns.
+- **Modular Design**: Each component is independent and reusable.
+- **Pip Installable**: Easily install and integrate into your projects.
+
+---
+
+## Installation
+
+To install Gener8, use pip:
+
+```bash
+pip install gener8
+```
+
+Alternatively, to install from source:
+
+```bash
+# Clone the repository
+git clone https://github.com/abdulrahman0044/gener8.git
+cd gener8
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install the package
+pip install .
+```
+
+---
+
+## Usage
+
+Below is an example of how to use Gener8 to generate synthetic data:
+
+```python
+import pandas as pd
+import numpy as np
+from gener8 import Gener8Engine
+
+# Initialize the engine
+engine = Gener8Engine()
+
+# Create sample data
+data = pd.DataFrame({
+    'age': np.random.normal(30, 10, 1000),
+    'income': np.random.normal(50000, 10000, 1000),
+    'category': np.random.choice(['A', 'B', 'C'], 1000)
+})
+
+# Load and train the model
+engine.load_and_train(data, n_components=3)
+
+# Generate synthetic data
+synthetic_data = engine.generate(100)
+print(synthetic_data.head())
+```
+
+---
+
+## Requirements
+
+- Python >= 3.8
+- pandas >= 1.5.0
+- numpy >= 1.23.0
+- scikit-learn >= 1.1.0
+
+---
+
+## Project Structure
+
+```
+gener8/
+â”œâ”€â”€ gener8/
+â”‚   â”œâ”€â”€ __init__.py
+â”‚   â”œâ”€â”€ data_connector.py
+â”‚   â”œâ”€â”€ trainer.py
+â”‚   â”œâ”€â”€ generator.py
+â”‚   â”œâ”€â”€ engine.py
+â”‚   â””â”€â”€ evaluation.py
+â”œâ”€â”€ setup.py
+â”œâ”€â”€ README.md
+â””â”€â”€ requirements.txt
+```
+
+---
+
+## Development
+
+To contribute or modify Gener8:
+
+```bash
+# Clone the repository
+git clone https://github.com/abdulrahman0044/gener8.git
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Make changes and test locally
+
+# Build the package
+python -m build
+
+# Install locally
+pip install dist/gener8-0.1.0-py3-none-any.whl
+```
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+
+---
+
+## Contact
+
+For questions or contributions, please open a pull request or a issue on the [GitHub repository](https://github.com/abdulrahman0044/gener8) or contact `abdulrahamanbabatunde12@gmail.com`.

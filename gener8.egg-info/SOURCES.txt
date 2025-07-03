@@ -1,0 +1,13 @@
+README.md
+setup.py
+gener8/__init__.py
+gener8/data_connector.py
+gener8/engine.py
+gener8/evaluation.py
+gener8/generator.py
+gener8/trainer.py
+gener8.egg-info/PKG-INFO
+gener8.egg-info/SOURCES.txt
+gener8.egg-info/dependency_links.txt
+gener8.egg-info/requires.txt
+gener8.egg-info/top_level.txt
