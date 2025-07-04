@@ -78,8 +78,8 @@ class Trainer:
         self.dtypes = data.dtypes.to_dict()
         self.missing_proportions = data.isna().mean().to_dict()
         
-        # Drop rows with NaN in any column to ensure consistency
-        clean_data = data.dropna()
+        # Create a deep copy and drop rows with NaN
+        clean_data = data.copy(deep=True).dropna()
         if len(clean_data) == 0:
             raise ValueError("No complete cases in data")
         
@@ -87,18 +87,23 @@ class Trainer:
         categorical_encoded = []
         for col in categorical_cols:
             le = LabelEncoder()
-            clean_data[col] = clean_data[col].astype(str)
-            clean_data[col] = le.fit_transform(clean_data[col])
+            # Convert to string and encode, ensuring numeric output
+            clean_data.loc[:, col] = clean_data.loc[:, col].astype(str)
+            clean_data.loc[:, col] = le.fit_transform(clean_data.loc[:, col]).astype(np.int64)
             self.label_encoders[col] = le
             categorical_encoded.append(clean_data[col].values.reshape(-1, 1))
         
         # Scale numeric data
-        numeric_scaled = self.scaler.fit_transform(clean_data[numeric_cols])
+        numeric_scaled = self.scaler.fit_transform(clean_data[numeric_cols]).astype(np.float32)
         
         # Combine numeric and categorical data
         processed_data = numeric_scaled
         if categorical_encoded:
-            processed_data = np.hstack([numeric_scaled, np.hstack(categorical_encoded)])
+            categorical_array = np.hstack(categorical_encoded).astype(np.float32)
+            processed_data = np.hstack([numeric_scaled, categorical_array])
+        
+        # Ensure processed_data is float32 for PyTorch
+        processed_data = processed_data.astype(np.float32)
         
         # Split into training and validation sets
         train_data, val_data = train_test_split(processed_data, test_size=0.2, random_state=42)
@@ -177,7 +182,7 @@ class Trainer:
             train_dataset = torch.tensor(train_data, dtype=torch.float32).to(self.device)
             val_dataset = torch.tensor(val_data, dtype=torch.float32).to(self.device)
             train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-            val_loader = torch.utils.data.DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+            val_loader = torch.utils.data.DataLoader(val_data, batch_size=batch_size, shuffle=False)
             
             for epoch in range(min(epochs, max_epochs)):
                 self.model_generator.train()

@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="gener8",
-    version="0.1.4",
+    version="0.2.1",
     packages=find_packages(),
     install_requires=[
         "pandas>=1.5.0",
@@ -20,7 +20,7 @@ setup(
     url="https://github.com/abdulrahman0044/gener8",
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: OSI Approved :: MIT License",
+        "License :: OSI Approved :: GNU General License",
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",

@@ -118,7 +118,7 @@ pip install dist/gener8-0.1.0-py3-none-any.whl
 
 ## License
 
-This project is licensed under the **MIT License**. See the `LICENSE` file for details.
+This project is licensed under the **GNU General Public License**. See the `LICENSE` file for details.
 
 ---
 
