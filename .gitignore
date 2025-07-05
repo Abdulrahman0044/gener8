@@ -1,6 +1,8 @@
 ./venv
-.ipynb_checkpoints
-__pycache__
+./ipynb_checkpoints/
+/__pycache__/
+
+
 *.pyc
 *.pyo
 *.pyd
@@ -21,3 +23,6 @@ __pycache__
 *.venv
 *.virtualenv
 *.pth
+
+
+/gener8.egg-info/

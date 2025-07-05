@@ -58,7 +58,19 @@ data = pd.DataFrame({
 })
 
 # Load and train the model
-engine.load_and_train(data, n_components=3)
+engine.load_and_train(
+    data,
+    n_components=3,
+    epochs=5,
+    max_sample_size=10000,
+    batch_size=32,
+    gradient_accumulation_steps=2,
+    max_training_time=3600,
+    max_sequence_window=1,
+    enable_flexible_generation=True,
+    value_protection=True,
+    rare_category_replacement_method="CONSTANT",
+    differential_privacy=None)
 
 # Generate synthetic data
 synthetic_data = engine.generate(100)
@@ -89,7 +101,9 @@ gener8/
 │   └── evaluation.py
 ├── setup.py
 ├── README.md
-└── requirements.txt
+├── requirements.txt
+├── LICENSE
+├── MANIFEST.in
 ```
 
 ---
@@ -118,7 +132,7 @@ pip install dist/gener8-0.1.0-py3-none-any.whl
 
 ## License
 
-This project is licensed under the **GNU General Public License**. See the `LICENSE` file for details.
+This project is licensed under the **Apache 2.0 License**. See the `LICENSE` file for details.
 
 ---
 

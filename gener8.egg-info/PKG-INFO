@@ -1,12 +1,18 @@
 Metadata-Version: 2.4
-Name: gener8
+Name: gener8-synth
 Version: 0.1.0
 Summary: A synthetic data generation engine
-Home-page: https://github.com/abdulrahman0044/gener8
+Home-page: https://github.com/Abdulrahman0044/gener8
 Author: Abdulrahman Abdulrahman
 Author-email: abdulrahamanbabatunde12@gmail.com
+License: Apache-2.0
 Classifier: Programming Language :: Python :: 3
-Classifier: License :: OSI Approved :: GNU General License
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: License :: OSI Approved :: Apache Software License
 Classifier: Operating System :: OS Independent
 Requires-Python: >=3.8
 Description-Content-Type: text/markdown
@@ -23,6 +29,7 @@ Dynamic: classifier
 Dynamic: description
 Dynamic: description-content-type
 Dynamic: home-page
+Dynamic: license
 Dynamic: license-file
 Dynamic: requires-dist
 Dynamic: requires-python
@@ -88,7 +95,19 @@ data = pd.DataFrame({
 })
 
 # Load and train the model
-engine.load_and_train(data, n_components=3)
+engine.load_and_train(
+    data,
+    n_components=3,
+    epochs=5,
+    max_sample_size=10000,
+    batch_size=32,
+    gradient_accumulation_steps=2,
+    max_training_time=3600,
+    max_sequence_window=1,
+    enable_flexible_generation=True,
+    value_protection=True,
+    rare_category_replacement_method="CONSTANT",
+    differential_privacy=None)
 
 # Generate synthetic data
 synthetic_data = engine.generate(100)
@@ -119,7 +138,9 @@ gener8/
 â”‚   â””â”€â”€ evaluation.py
 â”œâ”€â”€ setup.py
 â”œâ”€â”€ README.md
-â””â”€â”€ requirements.txt
+â”œâ”€â”€ requirements.txt
+â”œâ”€â”€ LICENSE
+â”œâ”€â”€ MANIFEST.in
 ```
 
 ---
@@ -148,7 +169,7 @@ pip install dist/gener8-0.1.0-py3-none-any.whl
 
 ## License
 
-This project is licensed under the **GNU General Public License**. See the `LICENSE` file for details.
+This project is licensed under the **Apache 2.0 License**. See the `LICENSE` file for details.
 
 ---
 
