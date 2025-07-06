@@ -19,7 +19,7 @@
 To install Gener8, use pip:
 
 ```bash
-pip install gener8
+pip install gener8-synth
 ```
 
 Alternatively, to install from source:

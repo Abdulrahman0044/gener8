@@ -53,10 +53,10 @@ Dynamic: summary
 
 ## Installation
 
-To install Gener8, use pip:
+To install Gener8-synth, use pip:
 
 ```bash
-pip install gener8
+pip install gener8-synth
 ```
 
 Alternatively, to install from source:
